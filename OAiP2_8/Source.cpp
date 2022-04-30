@@ -8,13 +8,15 @@ const double A = 1.;
 const double B = 4.;
 const double DEFAULT_EPS = 0.000001;
 
-double correctInputDouble();
-int correctInputInt();
-double function(double x);
-int enterNumberInRange(int min, int max);
 double calculateByNumOfPartitions(double a, double b, int n);
 double calculateByEPS(double a, double b, double eps);
+double calculateFirstFunction(double a, double b);
+double function(double x);
+double firstFunction(double x);
 int numOfSymAfterComma(double num, int k);
+int correctInputInt();
+int enterNumberInRange(int min, int max);
+double correctInputDouble();
 
 int main()
 {
@@ -69,7 +71,7 @@ int main()
 			result = calculateByEPS(a, b, eps);
 			break;
 		}
-		cout << "Result: " << setprecision(k) << result << endl;
+		cout << "Result: " << setprecision(k) << result << "\nOriginal: " << calculateFirstFunction(a, b) << endl;
 		cout << "\nDo you want to continue?(Y/N)" << endl;
 		code = (char)_getch();
 	} while (code == 'Y' || code == 'y');
@@ -83,7 +85,7 @@ double calculateByNumOfPartitions(double a, double b, int n)
 	h = (b - a) / n;
 	cout << "Number of partitions: " << n << "\nStep: " << h << endl;
 	delta = h / 2.;
-	for (double x = a; x < b - h / 4.; x += h)
+	for (double x = a; x <= b - h / 4.; x += h)
 	{
 		res += function(x + delta);
 	}
@@ -108,6 +110,16 @@ double calculateByEPS(double a, double b, double eps)
 	} while (delta > eps);
 	cout << "The accuracy achieved in " << n / 2 << " number of partitions" << endl;
 	return result_prev;
+}
+
+double calculateFirstFunction(double a, double b)
+{
+	return firstFunction(b) - firstFunction(a);
+}
+
+double firstFunction(double x)
+{
+	return 0.5 * (x * x - 5. * x + 2.5 * sin(2. * x));
 }
 
 double function(double x)
