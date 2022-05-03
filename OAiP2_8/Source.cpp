@@ -28,7 +28,7 @@ int main()
 	cout << "------------------------------------------" << endl;
 	do
 	{
-		cout << "Do you want to use default values(a = 1, b = 4)?(Y/N)" << endl;
+		cout << "Do you want to use default values(a = " << A << ", b = " << B << ")? (Y / N)" << endl;
 		code = (char)_getch();
 		if (code == 'Y' || code == 'y')
 		{
